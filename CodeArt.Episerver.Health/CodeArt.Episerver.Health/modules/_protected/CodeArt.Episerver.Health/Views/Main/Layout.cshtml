@@ -1,0 +1,48 @@
+﻿@using EPiServer.Framework.Web.Resources
+@using EPiServer.Shell.Navigation
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html style="position:unset">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CodeArt Jupiter</title>
+    <link rel="shortcut icon" href="/util/images/favicon.ico" type="image/x-icon" />
+    @Html.Raw(ClientResources.RenderResources("Dojo", new[] { ClientResourceType.Style }))
+    @Html.Raw(ClientResources.RenderResources("ShellCore", new[] { ClientResourceType.Style }))
+    @*@Html.Raw(ClientResources.RenderResources("ShellWidgets"))
+        @Html.Raw(ClientResources.RenderResources("ShellCoreLightTheme"))
+        @Html.Raw(ClientResources.RenderResources("ShellWidgetsLightTheme"))*@
+    @Html.Raw(ClientResources.RenderResources("Navigation"))
+    <link href="@Url.Content(EPiServer.Shell.Paths.ToShellClientResource("ClientResources/epi/themes/sleek/sleek1.css"))" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content(EPiServer.Shell.Paths.ToShellClientResource("ClientResources/epi/themes/sleek/sleek2.css"))" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content(EPiServer.Shell.Paths.ToShellClientResource("ClientResources/epi/themes/sleek/document.css"))" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content(EPiServer.Shell.Paths.ToShellClientResource("ClientResources/lib/dgrid/css/dgrid.css"))" rel="stylesheet" type="text/css" />
+
+
+    @Html.Raw(ClientResources.RenderResources("DojoDashboardCompatibility", new[] { ClientResourceType.Style }))
+
+    @RenderSection("Header", false)
+</head>
+<body class="Sleek" style="position:unset!important">
+    @*@Html.Raw(Html.ShellInitializationScript())*@
+    @Html.Raw(Html.CreatePlatformNavigationMenu())
+    <div id="epi-application" @Html.Raw(Html.ApplyPlatformNavigation())>
+        <div class="epi-padding">
+            <div class="epi-contentArea">
+                <div id="FullRegion_ValidationSummary" class="EP-validationSummary" style="color:Black;display:none;">
+
+                </div>
+            </div>
+            <div class="epi-contentContainer epi-fullWidth" style="max-width:unset;">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
