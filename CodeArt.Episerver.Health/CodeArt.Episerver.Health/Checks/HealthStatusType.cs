@@ -11,6 +11,7 @@ namespace CodeArt.Episerver.Health.Checks
         NotChecked,
         OK,
         Warning,
-        Fault
+        Fault,
+        Performance
     }
 }

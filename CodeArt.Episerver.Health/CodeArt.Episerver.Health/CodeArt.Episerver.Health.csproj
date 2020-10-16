@@ -175,8 +175,10 @@
   <ItemGroup>
     <None Include="CodeArt.Episerver.Health.nuspec" />
     <None Include="modules\_protected\CMS\CMS.zip" />
+    <None Include="modules\_protected\CodeArt.Episerver.Health\module.config" />
     <None Include="modules\_protected\CodeArt.Episerver.Health\Views\Main\Index.cshtml" />
     <None Include="modules\_protected\CodeArt.Episerver.Health\Views\Main\Layout.cshtml" />
+    <None Include="modules\_protected\CodeArt.Episerver.Health\Web.config" />
     <None Include="modules\_protected\Shell\Shell.zip" />
     <None Include="Nuget.config" />
     <None Include="packages.config" />

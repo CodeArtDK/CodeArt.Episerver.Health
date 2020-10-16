@@ -18,4 +18,9 @@
 
 </div>
 <div class="epi-formArea">
+
+    @foreach(CodeArt.Episerver.Health.Checks.IHealthCheck mm in Model.HealthChecks)
+    {
+        <div>@mm.Name</div>
+    }
 </div>

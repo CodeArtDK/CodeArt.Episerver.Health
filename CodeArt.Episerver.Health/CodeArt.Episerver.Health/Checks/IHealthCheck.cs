@@ -17,6 +17,9 @@ namespace CodeArt.Episerver.Health.Checks
 
         string StatusText { get; }
 
+
+        int SortOrder { get; }
+
         //Last run, last status
         DateTime LastRun { get; }
 

@@ -14,7 +14,9 @@ namespace CodeArt.Episerver.Health.Checks
 
         public HealthStatusType Status { get; set; }
 
-        public string StatusText { get; set; }
+        public virtual string StatusText { get; set; }
+
+        public virtual int SortOrder { get; }
 
         public DateTime LastRun { get; set; }
 

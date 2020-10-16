@@ -11,7 +11,7 @@ namespace CodeArt.Episerver.Health
     [MenuProvider]
     public class HealthMenuProvider : IMenuProvider
     {
-        const string ModuleName = "HealthCheck";
+        const string ModuleName = "CodeArt.Episerver.Health";
 
         const string HealthTitle = "HealthCheck";
         const string ConsolePath = "global/cms/Health";
@@ -21,7 +21,6 @@ namespace CodeArt.Episerver.Health
             
 
             yield return console;
-
 
         }
 

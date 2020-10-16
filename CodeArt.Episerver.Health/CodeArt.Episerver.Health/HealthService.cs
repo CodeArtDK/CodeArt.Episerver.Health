@@ -1,10 +1,13 @@
-﻿using System;
+﻿using CodeArt.Episerver.Health.Checks;
+using EPiServer.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace EpiHealthCheck.modules._protected.HealthCheck
 {
+    [ServiceConfiguration(ServiceType = typeof(HealthService), Lifecycle = ServiceInstanceScope.Singleton)]
     public class HealthService
     {
         //Find all registered health checks and go through them (based on UI).
@@ -35,6 +38,9 @@ namespace EpiHealthCheck.modules._protected.HealthCheck
          * 
          * Commerce checks
          * 
+         * Support Potential to Fix issues found.
+         * 
+         * 
          * 
          * Also:
          * Scheduled job to run checks and report if something changes
@@ -42,6 +48,12 @@ namespace EpiHealthCheck.modules._protected.HealthCheck
          * Some checks should support "Fix this" call
          * 
          * */
+        public List<IHealthCheck> HealthChecks { get; set; }
+
+        public HealthService()
+        {
+            AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => t.IsAssignableFrom(typeof(IHealthCheck)))).Select(s => Activator.CreateInstance(s)).ToList();
+        }
 
     }
 }
