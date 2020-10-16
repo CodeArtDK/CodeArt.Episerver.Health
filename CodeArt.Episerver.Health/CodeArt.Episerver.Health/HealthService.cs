@@ -52,7 +52,7 @@ namespace EpiHealthCheck.modules._protected.HealthCheck
 
         public HealthService()
         {
-            AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => t.IsAssignableFrom(typeof(IHealthCheck)))).Select(s => Activator.CreateInstance(s)).ToList();
+            HealthChecks=AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => !t.IsInterface && t.IsAssignableFrom(typeof(IHealthCheck)))).Select(s => Activator.CreateInstance(s)).Cast<IHealthCheck>().ToList();
         }
 
     }
