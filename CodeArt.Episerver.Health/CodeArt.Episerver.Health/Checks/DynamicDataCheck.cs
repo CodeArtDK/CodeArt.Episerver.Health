@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeArt.Episerver.Health.Checks
 {
-    public enum HealthStatusType
+    public class DynamicDataCheck 
     {
-        NotChecked,
-        OK,
-        Warning,
-        BadPractice,
-        Fault,
-        Performance
     }
 }

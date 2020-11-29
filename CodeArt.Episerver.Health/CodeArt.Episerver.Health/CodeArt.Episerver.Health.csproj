@@ -162,11 +162,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Checks\CheckGroups.cs" />
+    <Compile Include="Checks\CheckResult.cs" />
     <Compile Include="Checks\CompilationCheck.cs" />
+    <Compile Include="Checks\ContentTypeCheck.cs" />
+    <Compile Include="Checks\DynamicDataCheck.cs" />
     <Compile Include="Checks\HealthCheckBase.cs" />
     <Compile Include="Checks\HealthStatusType.cs" />
     <Compile Include="Checks\IHealthCheck.cs" />
-    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Checks\ScheduledJobsCheck.cs" />
+    <Compile Include="Checks\VersionCheck.cs" />
+    <Compile Include="Controllers\HealthCheckController.cs" />
     <Compile Include="HealthMenuProvider.cs" />
     <Compile Include="HealthService.cs" />
     <Compile Include="Models\MainModel.cs" />
@@ -176,8 +181,8 @@
     <None Include="CodeArt.Episerver.Health.nuspec" />
     <None Include="modules\_protected\CMS\CMS.zip" />
     <None Include="modules\_protected\CodeArt.Episerver.Health\module.config" />
-    <None Include="modules\_protected\CodeArt.Episerver.Health\Views\Main\Index.cshtml" />
-    <None Include="modules\_protected\CodeArt.Episerver.Health\Views\Main\Layout.cshtml" />
+    <None Include="modules\_protected\CodeArt.Episerver.Health\Views\HealthCheck\Index.cshtml" />
+    <None Include="modules\_protected\CodeArt.Episerver.Health\Views\HealthCheck\Layout.cshtml" />
     <None Include="modules\_protected\CodeArt.Episerver.Health\Web.config" />
     <None Include="modules\_protected\Shell\Shell.zip" />
     <None Include="Nuget.config" />

@@ -12,16 +12,25 @@ namespace CodeArt.Episerver.Health.Checks
 
         public abstract string Group { get; }
 
-        public HealthStatusType Status { get; set; }
+        public virtual int SortOrder { get => 100; }
 
-        public virtual string StatusText { get; set; }
+        protected virtual CheckResult CreateCheckResult(HealthStatusType statusType=HealthStatusType.OK, string statusText="", bool canFix = false, string statusCode = "")
+        {
+            CheckResult cr = new CheckResult();
+            cr.CheckTime = DateTime.Now;
+            cr.CheckType = this.GetType().FullName;
+            cr.CanFix = canFix;
+            cr.Status = statusType;
+            cr.StatusText = statusText;
+            cr.StatusCode = statusCode;
+            return cr;
+        }
 
-        public virtual int SortOrder { get; }
+        public virtual bool Fix(CheckResult checkResult)
+        {
+            return false;
+        }
 
-        public DateTime LastRun { get; set; }
-
-        public bool HasChanged { get; set; }
-
-        public abstract void PerformCheck();
+        public abstract CheckResult PerformCheck();
     }
 }

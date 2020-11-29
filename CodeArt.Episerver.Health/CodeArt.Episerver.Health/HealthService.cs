@@ -1,4 +1,5 @@
 ﻿using CodeArt.Episerver.Health.Checks;
+using EPiServer.Data.Dynamic;
 using EPiServer.ServiceLocation;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,11 @@ namespace EpiHealthCheck.modules._protected.HealthCheck
          * Cookie check
          * https check
          * content provider checks
-         * cache checks
+         * cache checks  - outputcaching
+         * 
+         * Security checks - roles
+         * ACL checks - any lower pages pages with specific accessibility higher than parents?
+         * Content checks - Blocks that are not used?
          * 
          * 
          * Commerce checks
@@ -50,9 +55,40 @@ namespace EpiHealthCheck.modules._protected.HealthCheck
          * */
         public List<IHealthCheck> HealthChecks { get; set; }
 
+
+        //Use DDS to store check results
+
+        public CheckResult GetLatestResultFrom(IHealthCheck hc)
+        {
+            string nm = hc.GetType().FullName;
+            return GetStore().Items<CheckResult>().Where(cr => cr.CheckType == nm).OrderByDescending(cr => cr.CheckTime).FirstOrDefault();
+        }
+
+        private DynamicDataStore GetStore()
+        {
+            var store = DynamicDataStoreFactory.Instance.CreateStore(typeof(CheckResult));
+            return store;
+        }
+
+        public void SaveResults(CheckResult result)
+        {
+            GetStore().Save(result);
+        }
+
+        public void CheckAll()
+        {
+            foreach(var check in this.HealthChecks)
+            {
+                var res = check.PerformCheck();
+                SaveResults(res);
+            }
+        }
+
         public HealthService()
         {
-            HealthChecks=AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => !t.IsInterface && t.IsAssignableFrom(typeof(IHealthCheck)))).Select(s => Activator.CreateInstance(s)).Cast<IHealthCheck>().ToList();
+            var lst = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => !t.IsInterface && !t.IsAbstract && typeof(IHealthCheck).IsAssignableFrom(t))).Select(s => Activator.CreateInstance(s)).ToList();
+
+            HealthChecks =lst.Cast<IHealthCheck>().ToList();
         }
 
     }

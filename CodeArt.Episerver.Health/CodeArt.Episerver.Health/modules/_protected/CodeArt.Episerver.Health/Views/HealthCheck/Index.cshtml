@@ -1,0 +1,97 @@
+﻿@using EPiServer.Framework.Web.Resources
+@using EPiServer.Shell.Navigation
+@model CodeArt.Episerver.Health.Models.MainModel
+
+@{
+    Layout = "Layout.cshtml";
+}
+
+
+<div class="epi-contentArea">
+    <h1 class="EP-prefix">Health Check</h1>
+    <p>
+        <span class="EP-systemInfo">
+            See Health Check overview
+        </span>
+    </p>
+    <a href="@Url.Action("RunAll", "HealthCheck")" class=".epi-button--bold">Check All</a>
+
+</div>
+<div class="epi-formArea">
+    <ul class="nav  nav--stacked  media-list">
+        @foreach (var mm in Model.HealthChecks)
+        {
+            <li>
+                <span class="media-list__object  dijitInline dijitReset dijitIcon  epi-icon--colored  epi-iconSuccess"></span>
+                <p class="media-list__text">@mm.HealthCheck.Name
+                    @if (mm.LastResult != null) {
+                    <i>Last check: @(mm.LastResult.CheckTime.ToString())</i>
+                }
+                </p>
+            </li>
+            <!--
+        <li><span class="media-list__object  dijitInline dijitReset dijitIcon  epi-icon--colored  epi-iconDanger"></span><pre class="media-list__text"><code>.epi-iconDanger  .epi-icon--colored</code></pre></li>
+        <li><span class="media-list__object  dijitInline dijitReset dijitIcon  epi-icon--colored  epi-iconWarning"></span><pre class="media-list__text"><code>.epi-iconWarning  .epi-icon--colored</code></pre></li>
+        <li><span class="media-list__object  dijitInline dijitReset dijitIcon  epi-icon--colored  epi-iconInfo"></span><pre class="media-list__text"><code>.epi-iconInfo  .epi-icon--colored</code></pre></li>
+            -->
+        }
+        @*<li>
+            <h5>Standard</h5>
+            <div style="width: 100%; height: 100px">
+                <div class="dijitTabContainer dijitTabContainerTop dijitContainer dijitLayoutContainer tabStrip-disabled" id="dijit_layout_TabContainer_0" lang="en" widgetid="dijit_layout_TabContainer_0" style="width: 100%; height: 100%;">
+                    <div class="dijitTabListContainer-top dijitTabController dijitScrollingTabController tabStrip-disabled dijitAlignTop dijitLayoutContainer" style="left: 0px; top: 0px; position: absolute; width: 671px; height: 35px;" id="dijit_layout_TabContainer_0_tablist" lang="en" widgetid="dijit_layout_TabContainer_0_tablist" _dijitmenudijit_layout_tabcontainer_0_tablist_menu="1">
+                        <div data-dojo-attach-event="onclick:_onClick" class="dijitTabInnerDiv dijitTabContent dijitButtonContents dijitTab tabStripButton dijitbelow-altArrowButton tabStripButton-top dijitAlignRight" data-dojo-attach-point="focusNode" role="button" tabindex="-1" lang="en" id="dijit_layout_TabContainer_0_tablist_menuBtn" title="" widgetid="dijit_layout_TabContainer_0_tablist_menuBtn" style="user-select: none; display: none; left: 671px; top: 0px; position: absolute; height: 35px;">
+                            <img role="presentation" alt="" src="//ajax.googleapis.com/ajax/libs/dojo/1.8.9/dojo/resources/blank.gif" class="dijitTabStripIcon dijitTabStripMenuIcon" data-dojo-attach-point="iconNode">
+                            <span data-dojo-attach-point="containerNode,titleNode" class="dijitButtonText dijitDisplayNone">▼</span>
+                        </div>
+                        <div data-dojo-attach-event="onclick:_onClick" class="dijitTabInnerDiv dijitTabContent dijitButtonContents tabStripButton-top dijitAlignLeft dijitTab tabStripButton dijitTabDisabled tabStripButtonDisabled dijitDisabled" data-dojo-attach-point="focusNode" role="button" lang="en" id="dijit_layout_TabContainer_0_tablist_leftBtn" title="" widgetid="dijit_layout_TabContainer_0_tablist_leftBtn" style="user-select: none; display: none; left: 0px; top: 0px; position: absolute; height: 35px;" aria-disabled="true" tabindex="-1">
+                            <img role="presentation" alt="" src="//ajax.googleapis.com/ajax/libs/dojo/1.8.9/dojo/resources/blank.gif" class="dijitTabStripIcon dijitTabStripSlideLeftIcon" data-dojo-attach-point="iconNode">
+                            <span data-dojo-attach-point="containerNode,titleNode" class="dijitButtonText dijitDisplayNone">◀</span>
+                        </div>
+                        <div data-dojo-attach-event="onclick:_onClick" class="dijitTabInnerDiv dijitTabContent dijitButtonContents tabStripButton-top dijitAlignRight dijitTab tabStripButton dijitTabDisabled tabStripButtonDisabled dijitDisabled" data-dojo-attach-point="focusNode" role="button" lang="en" id="dijit_layout_TabContainer_0_tablist_rightBtn" title="" widgetid="dijit_layout_TabContainer_0_tablist_rightBtn" style="user-select: none; display: none; left: 671px; top: 0px; position: absolute; height: 35px;" aria-disabled="true" tabindex="-1">
+                            <img role="presentation" alt="" src="//ajax.googleapis.com/ajax/libs/dojo/1.8.9/dojo/resources/blank.gif" class="dijitTabStripIcon dijitTabStripSlideRightIcon" data-dojo-attach-point="iconNode">
+                            <span data-dojo-attach-point="containerNode,titleNode" class="dijitButtonText dijitDisplayNone">▶</span>
+                        </div>
+                        <div class="dijitTabListWrapper dijitTabContainerTopNone dijitAlignClient" data-dojo-attach-point="tablistWrapper" style="height: 35px; left: 0px; top: 0px; position: absolute; width: 671px;">
+                            <div role="tablist" data-dojo-attach-event="onkeypress:onkeypress" data-dojo-attach-point="containerNode" class="nowrapTabStrip dijitTabContainerTop-tabs" style="width: 50600px;">
+                                <div role="presentation" data-dojo-attach-point="titleNode,innerDiv,tabContent" class="dijitTabInner dijitTabContent dijitTab dijitTabChecked dijitChecked" lang="en" widgetid="dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_0">
+                                    <img src="//ajax.googleapis.com/ajax/libs/dojo/1.8.9/dojo/resources/blank.gif" alt="" class="dijitIcon dijitTabButtonIcon dijitNoIcon" data-dojo-attach-point="iconNode">
+                                    <span data-dojo-attach-point="containerNode,focusNode" class="tabLabel" role="tab" tabindex="0" id="dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_0" aria-disabled="false" title="" aria-selected="true" style="user-select: none;">My first tab</span>
+                                    <span class="dijitInline dijitTabCloseButton dijitTabCloseIcon" data-dojo-attach-point="closeNode" role="presentation" title="Close" style="display: none;">
+                                        <span data-dojo-attach-point="closeText" class="dijitTabCloseText">[x]</span>
+                                    </span>
+                                </div><div role="presentation" data-dojo-attach-point="titleNode,innerDiv,tabContent" class="dijitTabInner dijitTabContent dijitTab" lang="en" widgetid="dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_1">
+                                    <img src="//ajax.googleapis.com/ajax/libs/dojo/1.8.9/dojo/resources/blank.gif" alt="" class="dijitIcon dijitTabButtonIcon dijitNoIcon" data-dojo-attach-point="iconNode">
+                                    <span data-dojo-attach-point="containerNode,focusNode" class="tabLabel" role="tab" tabindex="-1" id="dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_1" aria-disabled="false" title="" style="user-select: none;" aria-selected="false">My second tab</span>
+                                    <span class="dijitInline dijitTabCloseButton dijitTabCloseIcon" data-dojo-attach-point="closeNode" role="presentation" title="Close" style="display: none;">
+                                        <span data-dojo-attach-point="closeText" class="dijitTabCloseText">[x]</span>
+                                    </span>
+                                </div><div role="presentation" data-dojo-attach-point="titleNode,innerDiv,tabContent" class="dijitTabInner dijitTabContent dijitTab" lang="en" widgetid="dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_2">
+                                    <img src="//ajax.googleapis.com/ajax/libs/dojo/1.8.9/dojo/resources/blank.gif" alt="" class="dijitIcon dijitTabButtonIcon dijitNoIcon" data-dojo-attach-point="iconNode">
+                                    <span data-dojo-attach-point="containerNode,focusNode" class="tabLabel" role="tab" tabindex="-1" id="dijit_layout_TabContainer_0_tablist_dijit_layout_ContentPane_2" aria-disabled="false" title="" style="user-select: none;" aria-selected="false">My last tab</span>
+                                    <span class="dijitInline dijitTabCloseButton dijitTabCloseIcon" data-dojo-attach-point="closeNode" role="presentation" title="Close" style="display: none;">
+                                        <span data-dojo-attach-point="closeText" class="dijitTabCloseText">[x]</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-dojo-attach-point="tablistSpacer" class="dijitTabSpacer dijitTabContainerTop-spacer dijitAlignTop" style="left: 0px; top: 35px; position: absolute; width: 671px;"></div>
+                    <div class="dijitTabPaneWrapper dijitTabContainerTop-container dijitAlignClient" data-dojo-attach-point="containerNode" style="left: 0px; top: 35px; position: absolute; width: 671px; height: 65px;">
+                        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="selected:true" style="padding-top: 10px; left: 0px; top: 0px; width: 671px; height: 55px;" class="dijitContentPane dijitTabPane dijitTabContainerTop-child dijitTabContainerTop-dijitContentPane dijitVisible" id="dijit_layout_ContentPane_0" lang="en" widgetid="dijit_layout_ContentPane_0" title="">
+                            Lorem ipsum and all around...
+                        </div>
+                        <div data-dojo-type="dijit/layout/ContentPane" style="padding-top: 10px; left: 0px; top: 0px; width: 671px; height: 55px;" class="dijitContentPane dijitTabPane dijitTabContainerTop-child dijitTabContainerTop-dijitContentPane dijitHidden" id="dijit_layout_ContentPane_1" lang="en" widgetid="dijit_layout_ContentPane_1" title="">
+                            Lorem ipsum and all around - second...
+                        </div>
+                        <div data-dojo-type="dijit/layout/ContentPane" style="padding-top: 10px; left: 0px; top: 0px; width: 671px; height: 55px;" class="dijitContentPane dijitTabPane dijitTabContainerTop-child dijitTabContainerTop-dijitContentPane dijitHidden" id="dijit_layout_ContentPane_2" lang="en" widgetid="dijit_layout_ContentPane_2" title="">
+                            Lorem ipsum and all around - last...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>*@
+    </ul>
+
+      
+</div>

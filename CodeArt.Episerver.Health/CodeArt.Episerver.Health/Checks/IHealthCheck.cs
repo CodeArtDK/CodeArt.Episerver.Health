@@ -12,22 +12,19 @@ namespace CodeArt.Episerver.Health.Checks
         //Defined in CheckGroups
         string Group { get; }
 
-        //status and status text
-        HealthStatusType Status { get; }
-
-        string StatusText { get; }
-
 
         int SortOrder { get; }
 
-        //Last run, last status
-        DateTime LastRun { get; }
-
-        //has changed
-        bool HasChanged { get; }
 
         //RunCheck - sets status, status text
-        void PerformCheck();
+        CheckResult PerformCheck();
+
+        /// <summary>
+        /// Tries to fix it. 
+        /// </summary>
+        /// <param name="checkResult"></param>
+        /// <returns>true, if fix is successful</returns>
+        bool Fix(CheckResult checkResult);
 
     }
 }

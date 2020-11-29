@@ -13,11 +13,11 @@ namespace CodeArt.Episerver.Health
     {
         const string ModuleName = "CodeArt.Episerver.Health";
 
-        const string HealthTitle = "HealthCheck";
+        const string HealthTitle = "Health Check";
         const string ConsolePath = "global/cms/Health";
         public IEnumerable<MenuItem> GetMenuItems()
         {
-            var console = CreateUrlMenuItem(HealthTitle, ConsolePath, Paths.ToResource(ModuleName, "Main"));
+            var console = CreateUrlMenuItem(HealthTitle, ConsolePath, Paths.ToResource(ModuleName, "HealthCheck"));
             
 
             yield return console;

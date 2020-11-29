@@ -9,12 +9,12 @@ using System.Web.Mvc;
 
 namespace CodeArt.Episerver.Health.Controllers
 {
-    public class MainController : Controller
+    public class HealthCheckController : Controller
     {
 
         private readonly HealthService healthService;
 
-        public MainController(HealthService service)
+        public HealthCheckController(HealthService service)
         {
             healthService = service;
         }
@@ -26,10 +26,25 @@ namespace CodeArt.Episerver.Health.Controllers
             //Also, load last runs from DDS and show
 
             MainModel mm = new MainModel();
-            mm.HealthChecks = healthService.HealthChecks;
+            mm.HealthChecks = new List<HealthCheckAndResult>();
+            foreach(var hc in healthService.HealthChecks)
+            {
+                HealthCheckAndResult hr = new HealthCheckAndResult();
+                hr.HealthCheck = hc;
+                hr.LastResult = healthService.GetLatestResultFrom(hc);
+                mm.HealthChecks.Add(hr);
+            }
 
             //Details view shows when a check has been run, and what it has returned.
             return View(mm);
+        }
+
+        public ActionResult RunAll()
+        {
+            //Runs all checks
+            healthService.CheckAll();
+
+            return RedirectToAction("Index");
         }
     }
 }
