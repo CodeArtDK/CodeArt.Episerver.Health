@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,9 +19,10 @@ namespace CodeArt.Episerver.Health.Checks
         public override CheckResult PerformCheck()
         {
             //Get Packages List
+            var epiFrameworkAssembly=AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.Contains("EPiServer.Framework")).FirstOrDefault();
             //Fetch list from Episerver nuget feed.
             //See which packages are in old versions
-            return CreateCheckResult();
+            return CreateCheckResult(statusText:$"Episerver Framework: {epiFrameworkAssembly.GetName().Version.ToString()}");
         }
     }
 }

@@ -33,19 +33,21 @@
 
                 <li>
                     <span class="media-list__object  dijitInline dijitReset dijitIcon  epi-icon--colored  @icon"></span><b>@mm.HealthCheck.Name</b> <a href="@Url.Action("RunCheck", "HealthCheck", new { Name = mm.HealthCheck.FullName })">[Check now]</a>
-                    @if (mm.LastResult != null)
-                    {
+                    
                         <p class="media-list__text">
-                            @mm.LastResult.StatusText
+                            @if (mm.LastResult != null)
+                            {
+                            <span>@mm.LastResult.StatusText</span>
                             <br />
                             <i>Last checked: @(mm.LastResult.CheckTime.ToString())</i>
-                            @if (mm.LastResult.CanFix)
+                            if (mm.LastResult.CanFix)
                             {
                                 <br />
                                 <button>Fix problem</button>
                             }
+                            }
                         </p>
-                    }
+                    
                 </li>
             }
         </ul>

@@ -35,6 +35,12 @@ namespace EpiHealthCheck.modules._protected.HealthCheck
          * https check
          * content provider checks
          * cache checks  - outputcaching
+         * Check geolocation
+         * Check if there are many old content pieces waiting for approval?
+         * Check if there are properties that are not set for any pages
+         * 
+         * 
+         * Processor check - is 64 bit machine, but not 64 bit process?
          * 
          * Security checks - roles
          * ACL checks - any lower pages pages with specific accessibility higher than parents?
@@ -96,7 +102,7 @@ namespace EpiHealthCheck.modules._protected.HealthCheck
 
         public HealthService()
         {
-            var lst = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => !t.IsInterface && !t.IsAbstract && typeof(IHealthCheck).IsAssignableFrom(t))).Select(s => Activator.CreateInstance(s)).ToList();
+            var lst = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => !t.IsInterface && !t.IsAbstract && typeof(IHealthCheck).IsAssignableFrom(t))).Select(s => ServiceLocator.Current.GetInstance(s)).ToList(); //Activator.CreateInstance(s)
 
             HealthChecks =lst.Cast<IHealthCheck>().ToList();
         }

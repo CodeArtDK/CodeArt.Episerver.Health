@@ -165,10 +165,12 @@
     <Compile Include="Checks\CheckResult.cs" />
     <Compile Include="Checks\CompilationCheck.cs" />
     <Compile Include="Checks\ContentTypeCheck.cs" />
+    <Compile Include="Checks\CustomErrorsCheck.cs" />
     <Compile Include="Checks\DynamicDataCheck.cs" />
     <Compile Include="Checks\HealthCheckBase.cs" />
     <Compile Include="Checks\HealthStatusType.cs" />
     <Compile Include="Checks\IHealthCheck.cs" />
+    <Compile Include="Checks\MemoryCheck.cs" />
     <Compile Include="Checks\ScheduledJobsCheck.cs" />
     <Compile Include="Checks\VersionCheck.cs" />
     <Compile Include="Controllers\HealthCheckController.cs" />
