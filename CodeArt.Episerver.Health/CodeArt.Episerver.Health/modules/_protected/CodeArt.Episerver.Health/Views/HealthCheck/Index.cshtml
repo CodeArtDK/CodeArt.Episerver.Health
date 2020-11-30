@@ -18,24 +18,43 @@
 
 </div>
 <div class="epi-formArea">
-    <ul class="nav  nav--stacked  media-list">
-        @foreach (var mm in Model.HealthChecks)
-        {
-            <li>
-                <span class="media-list__object  dijitInline dijitReset dijitIcon  epi-icon--colored  epi-iconSuccess"></span>
-                <p class="media-list__text">@mm.HealthCheck.Name
-                    @if (mm.LastResult != null) {
-                    <i>Last check: @(mm.LastResult.CheckTime.ToString())</i>
-                }
-                </p>
-            </li>
-            <!--
+    @foreach (var grp in Model.HealthChecks.GroupBy(hc => hc.HealthCheck.Group))
+    {
+        <h2>@grp.Key</h2>
+        <ul class="nav  nav--stacked  media-list">
+            @foreach (var mm in grp.OrderBy(hc => hc.HealthCheck.SortOrder))
+            {
+                var icon = (mm.LastResult == null) ? "epi-iconHelp" :
+                    (mm.LastResult.Status == CodeArt.Episerver.Health.Checks.HealthStatusType.OK) ? "epi-iconSuccess" :
+                    (mm.LastResult.Status == CodeArt.Episerver.Health.Checks.HealthStatusType.Warning) ? "epi-iconWarning" :
+                    (mm.LastResult.Status == CodeArt.Episerver.Health.Checks.HealthStatusType.Fault) ? "epi-iconError" :
+                    (mm.LastResult.Status == CodeArt.Episerver.Health.Checks.HealthStatusType.Performance) ? "epi-iconBell" : "epi-iconHelp";
+
+                <li>
+                    <span class="media-list__object  dijitInline dijitReset dijitIcon  epi-icon--colored  @icon"></span><b>@mm.HealthCheck.Name</b> <a href="@Url.Action("RunCheck", "HealthCheck", new { Name = mm.HealthCheck.FullName })">[Check now]</a>
+                    @if (mm.LastResult != null)
+                    {
+                        <p class="media-list__text">
+                            @mm.LastResult.StatusText
+                            <br />
+                            <i>Last check: @(mm.LastResult.CheckTime.ToString())</i>
+                            @if (mm.LastResult.CanFix)
+                            {
+
+                            }
+                        </p>
+                    }
+                </li>
+            }
+        </ul>
+    }
+    @*    
         <li><span class="media-list__object  dijitInline dijitReset dijitIcon  epi-icon--colored  epi-iconDanger"></span><pre class="media-list__text"><code>.epi-iconDanger  .epi-icon--colored</code></pre></li>
         <li><span class="media-list__object  dijitInline dijitReset dijitIcon  epi-icon--colored  epi-iconWarning"></span><pre class="media-list__text"><code>.epi-iconWarning  .epi-icon--colored</code></pre></li>
         <li><span class="media-list__object  dijitInline dijitReset dijitIcon  epi-icon--colored  epi-iconInfo"></span><pre class="media-list__text"><code>.epi-iconInfo  .epi-icon--colored</code></pre></li>
-            -->
-        }
-        @*<li>
+           
+
+        <li>
             <h5>Standard</h5>
             <div style="width: 100%; height: 100px">
                 <div class="dijitTabContainer dijitTabContainerTop dijitContainer dijitLayoutContainer tabStrip-disabled" id="dijit_layout_TabContainer_0" lang="en" widgetid="dijit_layout_TabContainer_0" style="width: 100%; height: 100%;">
@@ -91,7 +110,6 @@
                 </div>
             </div>
         </li>*@
-    </ul>
 
-      
+
 </div>

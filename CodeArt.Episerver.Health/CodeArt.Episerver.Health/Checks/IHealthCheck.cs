@@ -12,7 +12,7 @@ namespace CodeArt.Episerver.Health.Checks
         //Defined in CheckGroups
         string Group { get; }
 
-
+        string FullName { get; }
         int SortOrder { get; }
 
 

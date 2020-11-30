@@ -84,6 +84,16 @@ namespace EpiHealthCheck.modules._protected.HealthCheck
             }
         }
 
+        public void CheckSingle(string fullname)
+        {
+            var obj=this.HealthChecks.Where(hc => hc.FullName == fullname).FirstOrDefault();
+            if (obj != null)
+            {
+                var res = obj.PerformCheck();
+                SaveResults(res);
+            }
+        }
+
         public HealthService()
         {
             var lst = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => !t.IsInterface && !t.IsAbstract && typeof(IHealthCheck).IsAssignableFrom(t))).Select(s => Activator.CreateInstance(s)).ToList();

@@ -35,6 +35,7 @@ namespace CodeArt.Episerver.Health.Controllers
                 mm.HealthChecks.Add(hr);
             }
 
+        
             //Details view shows when a check has been run, and what it has returned.
             return View(mm);
         }
@@ -44,6 +45,12 @@ namespace CodeArt.Episerver.Health.Controllers
             //Runs all checks
             healthService.CheckAll();
 
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult RunCheck(string Name)
+        {
+            healthService.CheckSingle(Name);
             return RedirectToAction("Index");
         }
     }

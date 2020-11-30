@@ -14,11 +14,13 @@ namespace CodeArt.Episerver.Health.Checks
 
         public virtual int SortOrder { get => 100; }
 
+        public string FullName { get => this.GetType().FullName;}
+
         protected virtual CheckResult CreateCheckResult(HealthStatusType statusType=HealthStatusType.OK, string statusText="", bool canFix = false, string statusCode = "")
         {
             CheckResult cr = new CheckResult();
             cr.CheckTime = DateTime.Now;
-            cr.CheckType = this.GetType().FullName;
+            cr.CheckType = FullName;
             cr.CanFix = canFix;
             cr.Status = statusType;
             cr.StatusText = statusText;
