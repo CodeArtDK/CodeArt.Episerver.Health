@@ -35,6 +35,10 @@ namespace CodeArt.Episerver.Health.Controllers
                 mm.HealthChecks.Add(hr);
             }
 
+            mm.TotalChecks = mm.HealthChecks.Count;
+            mm.ChecksNotRun = mm.HealthChecks.Where(hc => hc.LastResult == null).Count();
+            mm.ChecksNotOK = mm.HealthChecks.Where(hc => hc.LastResult != null && hc.LastResult.Status != Checks.HealthStatusType.OK).Count();
+            mm.Errors = mm.HealthChecks.Where(hc => hc.LastResult != null && hc.LastResult.Status == Checks.HealthStatusType.Fault).Count();
         
             //Details view shows when a check has been run, and what it has returned.
             return View(mm);

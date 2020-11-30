@@ -11,7 +11,8 @@
     <h1 class="EP-prefix">Health Check</h1>
     <p>
         <span class="EP-systemInfo">
-            See Health Check overview
+            Overview of system health: @Model.TotalChecks checks, @Model.ChecksNotRun has not been run yet.<br/>
+            @Model.ChecksNotOK were not ok when last checked, @Model.Errors indicated an error.
         </span>
     </p>
     <a href="@Url.Action("RunAll", "HealthCheck")" class=".epi-button--bold">Check All</a>
@@ -37,10 +38,11 @@
                         <p class="media-list__text">
                             @mm.LastResult.StatusText
                             <br />
-                            <i>Last check: @(mm.LastResult.CheckTime.ToString())</i>
+                            <i>Last checked: @(mm.LastResult.CheckTime.ToString())</i>
                             @if (mm.LastResult.CanFix)
                             {
-
+                                <br />
+                                <button>Fix problem</button>
                             }
                         </p>
                     }

@@ -24,6 +24,8 @@ namespace CodeArt.Episerver.Health.Checks
 
         public bool CanFix { get; set; }
 
+        //Severity?
+
         public CheckResult()
         {
             CheckTime = DateTime.Now;

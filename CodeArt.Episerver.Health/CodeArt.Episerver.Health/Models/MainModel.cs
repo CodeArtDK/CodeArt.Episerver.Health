@@ -9,6 +9,14 @@ namespace CodeArt.Episerver.Health.Models
 {
     public class MainModel
     {
+        public int TotalChecks { get; set; }
+
+        public int ChecksNotRun { get; set; }
+
+        public int ChecksNotOK { get; set; }
+
+        public int Errors { get; set; }
+
         public List<HealthCheckAndResult> HealthChecks{ get; set; }
     }
 
