@@ -21,7 +21,6 @@ namespace CodeArt.Episerver.Health.Checks
         {
             //Check OptimizeCompilations and if it is debug
             CompilationSection configSection = (CompilationSection)ConfigurationManager.GetSection("system.web/compilation");
-            //            if(configSection.Debug
 
             if (!configSection.OptimizeCompilations) return base.CreateCheckResult(HealthStatusType.Performance, "Compilations not optimized. You can increase performance by setting OptimizeCompilations to true.", true);
             else return CreateCheckResult();
@@ -50,11 +49,11 @@ namespace CodeArt.Episerver.Health.Checks
 
         public override CheckResult PerformCheck()
         {
-            //Check OptimizeCompilations and if it is debug
             CompilationSection configSection = (CompilationSection)ConfigurationManager.GetSection("system.web/compilation");
-            //            if(configSection.Debug
 
-            if (configSection.Debug) return CreateCheckResult(HealthStatusType.Performance, "Code is running with Debug enabled. If this is a production site you can improve it by setting debug to false.", true);
+            if (configSection.Debug) 
+                return CreateCheckResult(HealthStatusType.Performance, 
+                    "Code is running with Debug enabled. If this is a production site you can improve it by setting debug to false.", true);
             else return CreateCheckResult();
         }
     }

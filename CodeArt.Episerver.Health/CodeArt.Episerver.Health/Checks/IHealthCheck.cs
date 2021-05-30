@@ -15,14 +15,13 @@ namespace CodeArt.Episerver.Health.Checks
         string FullName { get; }
         int SortOrder { get; }
 
-
         //RunCheck - sets status, status text
         CheckResult PerformCheck();
 
         /// <summary>
         /// Tries to fix it. 
         /// </summary>
-        /// <param name="checkResult"></param>
+        /// <param name="checkResult">Result from the check</param>
         /// <returns>true, if fix is successful</returns>
         bool Fix(CheckResult checkResult);
 
