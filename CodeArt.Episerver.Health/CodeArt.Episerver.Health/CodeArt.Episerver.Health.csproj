@@ -161,6 +161,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Checks\BitCheck.cs" />
     <Compile Include="Checks\CheckGroups.cs" />
     <Compile Include="Checks\CheckResult.cs" />
     <Compile Include="Checks\CompilationCheck.cs" />

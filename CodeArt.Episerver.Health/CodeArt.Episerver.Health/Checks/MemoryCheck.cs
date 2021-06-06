@@ -20,6 +20,7 @@ namespace CodeArt.Episerver.Health.Checks
             long memused = Environment.WorkingSet;
             string memusedstr = (memused / (1024 * 1024) + " MB");
 
+            //Check total or available memory
             
             return CreateCheckResult(statusText:$"{memusedstr} of memory used.");
         }
